@@ -2,6 +2,8 @@ package me.demo.comment;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import me.demo.common.CommonException;
+import me.demo.common.UserGuideMessage;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -17,7 +19,7 @@ public class CommentService {
 
     public Comment getComment(Long commentId) {
         return comments.findById(commentId)
-                .orElseThrow(() -> new CommentException("존재하지 않은 Comment 입니다."));
+                .orElseThrow(() -> new CommonException(UserGuideMessage.COMMENT_NOT_EXISTS));
     }
 
     public List<Comment> getComments(CommentSearchParam param) {
